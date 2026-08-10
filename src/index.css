@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #111111;
+    background-color: #ffffff;
+    overflow-x: hidden;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   EXACT ONEDAY GRADIENT — dark-grey → purple → 
+   pink → orange → teal, left to right
+   ══════════════════════════════════════════════ */
+.gradient-text-oneday {
+  background: linear-gradient(
+    to right,
+    #4b4b4b 0%,
+    #7c3aed 20%,
+    #9d174d 40%,
+    #f97316 60%,
+    #ca8a04 75%,
+    #0d9488 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline;
+}
+
+/* Word-by-word colour spread like OneDay */
+.hero-gradient-word-1 { color: #555555; }
+.hero-gradient-word-2 { 
+  background: linear-gradient(to right, #555555, #7c3aed);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-gradient-word-3 { 
+  background: linear-gradient(to right, #7c3aed, #9d174d);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-gradient-word-4 { 
+  background: linear-gradient(to right, #9d174d, #f97316);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-gradient-word-5 { 
+  background: linear-gradient(to right, #f97316, #ca8a04);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.gradient-text-soft {
+  background: linear-gradient(90deg, #18181b 0%, #475569 40%, #0f172a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom Smooth Transitions & Wizard Slide Effects */
+.wizard-card-enter {
+  animation: wizardSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes wizardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Hide scrollbars for smooth mentor carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Premium shimmer animation on logo */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.logo-shimmer {
+  background: linear-gradient(
+    90deg,
+    #111 0%,
+    #111 35%,
+    #888 50%,
+    #111 65%,
+    #111 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Premium card hover glow */
+.card-premium-hover {
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease;
+}
+.card-premium-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -12px rgba(0,0,0,0.18);
+}
+
+/* Smooth section fade in on scroll (handled via CSS animate) */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
