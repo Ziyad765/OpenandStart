@@ -96,9 +96,20 @@ export default function ApplicationWizard({ onClose, preselectedMentor }) {
     if (step > 0) setStep(prev => prev - 1);
   };
 
-  const handleConfirmBooking = (date, time) => {
-    setFormData(prev => ({ ...prev, selectedDate: date, selectedTime: time }));
+  const handleConfirmBooking = async (date, time) => {
+    const updatedData = { ...formData, selectedDate: date, selectedTime: time, selectedMentor: preselectedMentor || null };
+    setFormData(updatedData);
     setBookingConfirmed(true);
+
+    try {
+      await fetch('/api/applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedData)
+      });
+    } catch (err) {
+      console.error('Error saving application to database:', err);
+    }
   };
 
   return (
@@ -618,7 +629,7 @@ export default function ApplicationWizard({ onClose, preselectedMentor }) {
                   <input
                     type="text"
                     required
-                    placeholder="Jane"
+                    placeholder="Rahul"
                     value={formData.firstName}
                     onChange={e => setFormData({ ...formData, firstName: e.target.value })}
                     className="w-full pl-11 pr-4 py-3 bg-neutral-900 border border-neutral-800 rounded-xl focus:outline-none focus:border-white text-white text-sm"
@@ -630,7 +641,7 @@ export default function ApplicationWizard({ onClose, preselectedMentor }) {
                 <label className="block text-xs font-semibold text-neutral-400 mb-1">Last Name</label>
                 <input
                   type="text"
-                  placeholder="Doe"
+                  placeholder="Nair"
                   value={formData.lastName}
                   onChange={e => setFormData({ ...formData, lastName: e.target.value })}
                   className="w-full px-4 py-3 bg-neutral-900 border border-neutral-800 rounded-xl focus:outline-none focus:border-white text-white text-sm"
@@ -644,7 +655,7 @@ export default function ApplicationWizard({ onClose, preselectedMentor }) {
                   <input
                     type="tel"
                     required
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 98470 12345"
                     value={formData.phone}
                     onChange={e => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full pl-11 pr-4 py-3 bg-neutral-900 border border-neutral-800 rounded-xl focus:outline-none focus:border-white text-white text-sm"
@@ -659,7 +670,7 @@ export default function ApplicationWizard({ onClose, preselectedMentor }) {
                   <input
                     type="email"
                     required
-                    placeholder="jane@example.com"
+                    placeholder="rahul.nair@example.com"
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
                     className="w-full pl-11 pr-4 py-3 bg-neutral-900 border border-neutral-800 rounded-xl focus:outline-none focus:border-white text-white text-sm"
