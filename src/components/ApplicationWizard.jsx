@@ -297,16 +297,14 @@ export default function ApplicationWizard({ onClose, preselectedMentor }) {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[380px] overflow-y-auto pr-1">
               {[
-                { key: 'A', text: 'Education / Coaching' },
-                { key: 'B', text: 'E-Commerce' },
-                { key: 'C', text: 'Healthcare / Wellness' },
-                { key: 'D', text: 'Real Estate / PropTech' },
+                { key: 'A', text: 'AI & Robotics' },
+                { key: 'B', text: 'Manufacturing' },
+                { key: 'C', text: 'Agri Tech' },
+                { key: 'D', text: 'Maritime & Shipbuilding' },
                 { key: 'E', text: 'Tech & SaaS' },
-                { key: 'F', text: 'Freelance / Agency' },
-                { key: 'G', text: 'Manufacturing' },
-                { key: 'H', text: 'Brick & Mortar' },
-                { key: 'I', text: 'Food & Beverage' },
-                { key: 'J', text: 'Other' }
+                { key: 'F', text: 'E-Commerce' },
+                { key: 'G', text: 'Healthcare & Wellness' },
+                { key: 'H', text: 'Other' }
               ].map(opt => (
                 <button
                   key={opt.key}

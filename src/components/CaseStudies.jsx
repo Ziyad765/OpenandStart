@@ -20,32 +20,32 @@ export default function CaseStudies() {
               Featured Founder
             </span>
             <h3 className="text-3xl font-extrabold text-neutral-950 mb-3">
-              Aslam — Founder of Fynex International
+              Ziyad Ahammed — Founder of Codes&Errors
             </h3>
             <p className="text-neutral-600 text-sm leading-relaxed mb-6 font-medium">
-              "Working with Open & Start allowed us to scale Fynex International and expand our agricultural technology solutions into international markets, building sustainable B2B partnerships."
+              "Working with Open & Start allowed us to rapidly scale Codes&Errors, commercializing advanced AI models, conversational robotics, and high-performance tech architectures for global clients."
             </p>
             <div className="flex items-center gap-8 text-xs font-bold text-neutral-900">
               <div>
-                <span className="block text-2xl font-black text-neutral-950">Agri Tech</span>
-                <span className="text-neutral-500 font-normal">Sector Focus</span>
+                <span className="block text-2xl font-black text-neutral-950">AI & Robotics</span>
+                <span className="text-neutral-500 font-normal">Tech Focus</span>
               </div>
               <div>
-                <span className="block text-2xl font-black text-neutral-950">Global</span>
-                <span className="text-neutral-500 font-normal">Cross-Border Scale</span>
+                <span className="block text-2xl font-black text-neutral-950">ziyad.codes</span>
+                <span className="text-neutral-500 font-normal">Portfolio</span>
               </div>
             </div>
           </div>
 
           <div className="rounded-2xl overflow-hidden shadow-lg h-72 sm:h-96 relative bg-neutral-900">
             <img
-              src="/mentors/aslam.jpeg"
-              alt="Aslam - Founder of Fynex International"
+              src="/mentors/ziyad.jpeg"
+              alt="Ziyad Ahammed - Founder of Codes&Errors"
               className="w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 text-white font-bold text-sm">
-              Aslam • Fynex International
+              Ziyad Ahammed • Codes&Errors
             </div>
           </div>
         </div>
