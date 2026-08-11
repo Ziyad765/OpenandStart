@@ -37,11 +37,11 @@ export default function CaseStudies() {
             </div>
           </div>
 
-          <div className="rounded-2xl overflow-hidden shadow-lg h-72 sm:h-96 relative bg-neutral-900">
+          <div className="rounded-2xl overflow-hidden shadow-lg h-72 sm:h-96 relative bg-neutral-900 border border-neutral-200/60">
             <img
               src="/mentors/ziyad.jpeg"
               alt="Ziyad Ahammed - Founder of Codes&Errors"
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-top"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 text-white font-bold text-sm">
