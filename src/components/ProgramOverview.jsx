@@ -51,7 +51,7 @@ export default function ProgramOverview() {
               </p>
 
               <div className="pt-6 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400">
-                <span>Program Duration: 18 Months Part-Time</span>
+                <span className="text-neutral-300 font-medium">Verified Founder Portfolio</span>
                 <span className="text-emerald-400 font-semibold">100% Practical Execution</span>
               </div>
             </div>

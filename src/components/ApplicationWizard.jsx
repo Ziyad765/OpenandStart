@@ -47,13 +47,13 @@ const triggerConfetti = () => {
 };
 
 
-export default function ApplicationWizard({ onClose }) {
+export default function ApplicationWizard({ onClose, preselectedMentor }) {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({
     mainGoal: '',
     mentorScale: '',
     businessStage: '',
-    industry: '',
+    industry: preselectedMentor ? preselectedMentor.category : '',
     priorExperience: '',
     struggles: '',
     startTimeframe: '',
@@ -125,7 +125,7 @@ export default function ApplicationWizard({ onClose }) {
           <div className="flex items-center gap-3">
             <div className="w-32 sm:w-48 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-indigo-500 via-pink-500 to-amber-500 transition-all duration-300"
+                className="h-full bg-gradient-to-r from-amber-500 via-emerald-500 to-cyan-500 transition-all duration-300"
                 style={{ width: `${(step / (totalSteps - 1)) * 100}%` }}
               />
             </div>
@@ -150,14 +150,25 @@ export default function ApplicationWizard({ onClose }) {
         {/* STEP 0: WELCOME SCREEN */}
         {step === 0 && (
           <div className="text-center max-w-2xl wizard-card-enter">
-            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 mb-6">
-              <Sparkles className="w-3.5 h-3.5" /> 1-on-1 Mentor Match
-            </span>
+            {preselectedMentor ? (
+              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-amber-500/10 text-amber-300 text-xs font-bold border border-amber-500/30 mb-6">
+                <img src={preselectedMentor.image} alt={preselectedMentor.name} className="w-5 h-5 rounded-full object-cover" />
+                <span>Selected Mentor: {preselectedMentor.name} ({preselectedMentor.title} at {preselectedMentor.company})</span>
+              </div>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 mb-6">
+                <Sparkles className="w-3.5 h-3.5" /> 1-on-1 Mentor Match
+              </span>
+            )}
             <h2 className="text-4xl sm:text-6xl font-black tracking-tight leading-tight mb-6">
-              Match with a 7-figure entrepreneur & book your intro call
+              {preselectedMentor 
+                ? `Book your 1-on-1 strategy session with ${preselectedMentor.name}`
+                : "Match with a verified founder & book your intro call"}
             </h2>
             <p className="text-neutral-400 text-lg mb-10 leading-relaxed">
-              Answer a few quick questions so we can match you with the right mentor at Open & Start.
+              {preselectedMentor
+                ? `Answer a few quick questions so ${preselectedMentor.name} (${preselectedMentor.company}) can prepare your personalized mentorship roadmap.`
+                : "Answer a few quick questions so we can match you with Hanees, Aslam, or Mohamed at Open & Start."}
             </p>
             <button
               onClick={handleNextStep}
@@ -165,7 +176,7 @@ export default function ApplicationWizard({ onClose }) {
             >
               Start <ArrowRight className="w-5 h-5" />
             </button>
-            <p className="text-xs text-neutral-500 mt-4">Takes ~4 minutes</p>
+            <p className="text-xs text-neutral-500 mt-4">Takes ~3 minutes</p>
           </div>
         )}
 
@@ -538,31 +549,41 @@ export default function ApplicationWizard({ onClose }) {
           </div>
         )}
 
-        {/* STEP 13: REGION */}
+        {/* STEP 13: KERALA DISTRICT / REGION */}
         {step === 13 && (
           <div className="w-full wizard-card-enter">
             <h3 className="text-2xl sm:text-4xl font-extrabold mb-2">
-              13. Which region are you based in?
+              13. Which district / region of Kerala are you based in?
             </h3>
-            <p className="text-neutral-400 text-sm mb-8">Select one option:</p>
+            <p className="text-neutral-400 text-sm mb-6">Select your location in Kerala:</p>
 
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[380px] overflow-y-auto pr-1">
               {[
-                { key: 'A', text: 'North America' },
-                { key: 'B', text: 'Europe' },
-                { key: 'C', text: 'Asia-Pacific' },
-                { key: 'D', text: 'Latin America' },
-                { key: 'E', text: 'Middle East & Africa' }
+                { key: 'A', text: 'Ernakulam (Kochi)' },
+                { key: 'B', text: 'Thiruvananthapuram' },
+                { key: 'C', text: 'Kozhikode (Calicut)' },
+                { key: 'D', text: 'Thrissur' },
+                { key: 'E', text: 'Kannur' },
+                { key: 'F', text: 'Kottayam' },
+                { key: 'G', text: 'Palakkad' },
+                { key: 'H', text: 'Malappuram' },
+                { key: 'I', text: 'Kollam' },
+                { key: 'J', text: 'Alappuzha' },
+                { key: 'K', text: 'Idukki' },
+                { key: 'L', text: 'Wayanad' },
+                { key: 'M', text: 'Kasaragod' },
+                { key: 'N', text: 'Pathanamthitta' },
+                { key: 'O', text: 'Other / Outside Kerala' }
               ].map(opt => (
                 <button
                   key={opt.key}
                   onClick={() => handleSelectOption('region', opt.text)}
-                  className="w-full p-4 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-white/80 transition-all text-left flex items-center gap-4 group"
+                  className="p-3.5 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-white/80 transition-all text-left flex items-center gap-3 group"
                 >
-                  <span className="w-8 h-8 rounded-lg bg-neutral-800 text-neutral-300 font-bold flex items-center justify-center text-sm group-hover:bg-white group-hover:text-neutral-950 transition-colors">
+                  <span className="w-7 h-7 rounded-md bg-neutral-800 text-neutral-300 font-bold flex items-center justify-center text-xs group-hover:bg-white group-hover:text-neutral-950 transition-colors">
                     {opt.key}
                   </span>
-                  <span className="text-base font-medium text-neutral-200 group-hover:text-white">
+                  <span className="text-sm font-medium text-neutral-200 group-hover:text-white">
                     {opt.text}
                   </span>
                 </button>

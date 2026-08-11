@@ -14,32 +14,45 @@ import ApplicationWizard from './components/ApplicationWizard';
 
 export default function App() {
   const [showWizard, setShowWizard] = useState(false);
+  const [selectedMentor, setSelectedMentor] = useState(null);
+
+  const handleStartWizard = (mentor = null) => {
+    setSelectedMentor(mentor);
+    setShowWizard(true);
+  };
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 font-sans selection:bg-neutral-900 selection:text-white">
       {/* Header Bar */}
-      <Header onStartWizard={() => setShowWizard(true)} />
+      <Header onStartWizard={() => handleStartWizard()} />
 
       {/* Main Landing Sections */}
       <main>
-        <Hero onStartWizard={() => setShowWizard(true)} />
-        <MentorsSection onStartWizard={() => setShowWizard(true)} />
-        <ProcessSection onStartWizard={() => setShowWizard(true)} />
-        <BenefitsSection onStartWizard={() => setShowWizard(true)} />
+        <Hero onStartWizard={() => handleStartWizard()} />
+        <MentorsSection onStartWizard={(mentor) => handleStartWizard(mentor)} />
+        <ProcessSection onStartWizard={() => handleStartWizard()} />
+        <BenefitsSection onStartWizard={() => handleStartWizard()} />
         <ProgramOverview />
         <GlobalCampus />
         <Testimonials />
-        <PricingSection onStartWizard={() => setShowWizard(true)} />
+        <PricingSection onStartWizard={() => handleStartWizard()} />
         <CaseStudies />
       </main>
 
       {/* Footer */}
-      <Footer onStartWizard={() => setShowWizard(true)} />
+      <Footer onStartWizard={() => handleStartWizard()} />
 
       {/* 20-Step Interactive Application Wizard Overlay */}
       {showWizard && (
-        <ApplicationWizard onClose={() => setShowWizard(false)} />
+        <ApplicationWizard 
+          onClose={() => {
+            setShowWizard(false);
+            setSelectedMentor(null);
+          }} 
+          preselectedMentor={selectedMentor}
+        />
       )}
     </div>
   );
 }
+
