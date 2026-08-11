@@ -9,7 +9,7 @@ app.use(express.json());
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://Ziyad:Ziyad@cluster0.v2nkc3l.mongodb.net/openandstart?retryWrites=true&w=majority&appName=Cluster0";
 
-// Connection Caching for Vercel Serverless Functions
+// Serverless MongoDB Atlas connection caching
 let isConnected = false;
 async function connectDB() {
   if (isConnected && mongoose.connection.readyState === 1) return;
@@ -54,12 +54,12 @@ const applicationSchema = new mongoose.Schema({
 
 const Application = mongoose.models.Application || mongoose.model('Application', applicationSchema);
 
-// API Routes
-app.get('/api/health', (req, res) => {
+// Helper handlers to support both /api/applications and /applications routes seamlessly
+const handleHealth = (req, res) => {
   res.json({ status: 'ok', database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' });
-});
+};
 
-app.post('/api/applications', async (req, res) => {
+const handlePostApplication = async (req, res) => {
   try {
     const newApp = new Application(req.body);
     const savedApp = await newApp.save();
@@ -69,9 +69,9 @@ app.post('/api/applications', async (req, res) => {
     console.error('Error saving application:', error);
     res.status(500).json({ success: false, error: error.message });
   }
-});
+};
 
-app.get('/api/applications', async (req, res) => {
+const handleGetApplications = async (req, res) => {
   try {
     const applications = await Application.find().sort({ submittedAt: -1 });
     res.json({ success: true, count: applications.length, data: applications });
@@ -79,9 +79,9 @@ app.get('/api/applications', async (req, res) => {
     console.error('Error fetching applications:', error);
     res.status(500).json({ success: false, error: error.message });
   }
-});
+};
 
-app.delete('/api/applications/:id', async (req, res) => {
+const handleDeleteApplication = async (req, res) => {
   try {
     const deletedApp = await Application.findByIdAndDelete(req.params.id);
     if (!deletedApp) {
@@ -92,6 +92,12 @@ app.delete('/api/applications/:id', async (req, res) => {
     console.error('Error deleting application:', error);
     res.status(500).json({ success: false, error: error.message });
   }
-});
+};
+
+// Route Registrations (Support both /api/* and /* paths so Vercel Serverless Function never 404s)
+app.get(['/api/health', '/health', '/'], handleHealth);
+app.post(['/api/applications', '/applications'], handlePostApplication);
+app.get(['/api/applications', '/applications'], handleGetApplications);
+app.delete(['/api/applications/:id', '/applications/:id'], handleDeleteApplication);
 
 export default app;
