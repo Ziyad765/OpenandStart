@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Database, RefreshCw, Trash2, Download, Search, MapPin, Calendar, User, Phone, Mail, Award, CheckCircle2, ChevronRight, AlertCircle } from 'lucide-react';
+import { Database, RefreshCw, Trash2, Download, Search, MapPin, Calendar, User, Phone, Mail, Award, CheckCircle2, ChevronRight, AlertCircle, Lock, LogOut, KeyRound } from 'lucide-react';
 
 export default function AdminDashboard() {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return sessionStorage.getItem('openandstart_admin_auth') === 'true';
+  });
+  const [usernameInput, setUsernameInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+  const [loginError, setLoginError] = useState('');
+
   const [applications, setApplications] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedApp, setSelectedApp] = useState(null);
@@ -27,8 +34,28 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    fetchApplications();
-  }, []);
+    if (isAuthenticated) {
+      fetchApplications();
+    }
+  }, [isAuthenticated]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (usernameInput === 'admin' && passwordInput === 'admin') {
+      sessionStorage.setItem('openandstart_admin_auth', 'true');
+      setIsAuthenticated(true);
+      setLoginError('');
+    } else {
+      setLoginError('Invalid username or password. Please check your credentials.');
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('openandstart_admin_auth');
+    setIsAuthenticated(false);
+    setUsernameInput('');
+    setPasswordInput('');
+  };
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this applicant submission?')) return;
@@ -83,6 +110,83 @@ export default function AdminDashboard() {
     );
   });
 
+  // 🔒 LOGIN SCREEN IF NOT AUTHENTICATED
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-4 selection:bg-emerald-500 selection:text-neutral-950 font-sans">
+        <div className="w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+          {/* Accent Glow */}
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-amber-500 via-emerald-500 to-cyan-500" />
+          
+          <div className="text-center mb-8">
+            <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+              <Lock className="w-7 h-7" />
+            </div>
+            <h2 className="text-2xl font-black text-white tracking-tight">
+              Admin Portal Login
+            </h2>
+            <p className="text-xs text-neutral-400 mt-1">
+              Enter your credentials to access MongoDB Atlas submissions.
+            </p>
+          </div>
+
+          {loginError && (
+            <div className="p-3.5 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold mb-6 flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>{loginError}</span>
+            </div>
+          )}
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-xs font-bold text-neutral-400 mb-1.5 uppercase tracking-wider">Username</label>
+              <div className="relative">
+                <User className="w-5 h-5 absolute left-3.5 top-3.5 text-neutral-500" />
+                <input
+                  type="text"
+                  required
+                  placeholder="admin"
+                  value={usernameInput}
+                  onChange={e => setUsernameInput(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3 bg-neutral-950 border border-neutral-800 rounded-xl focus:outline-none focus:border-emerald-500 text-white text-sm"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-neutral-400 mb-1.5 uppercase tracking-wider">Password</label>
+              <div className="relative">
+                <KeyRound className="w-5 h-5 absolute left-3.5 top-3.5 text-neutral-500" />
+                <input
+                  type="password"
+                  required
+                  placeholder="••••••••"
+                  value={passwordInput}
+                  onChange={e => setPasswordInput(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3 bg-neutral-950 border border-neutral-800 rounded-xl focus:outline-none focus:border-emerald-500 text-white text-sm"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold rounded-xl transition-all shadow-lg text-sm mt-2"
+            >
+              Sign In to Admin
+            </button>
+          </form>
+
+          <div className="mt-6 pt-4 border-t border-neutral-800/80 text-center">
+            <p className="text-[11px] text-neutral-500">
+              Default Credentials: <span className="text-neutral-300 font-mono font-bold">admin</span> / <span className="text-neutral-300 font-mono font-bold">admin</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 🔓 AUTHENTICATED ADMIN DASHBOARD
   return (
     <div className="min-h-screen bg-neutral-950 text-white font-sans selection:bg-emerald-500 selection:text-neutral-950 p-4 sm:p-8">
       <div className="max-w-7xl mx-auto">
@@ -118,6 +222,13 @@ export default function AdminDashboard() {
               className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 text-xs font-bold transition-all flex items-center gap-2 shadow-lg"
             >
               <Download className="w-4 h-4" /> Export CSV
+            </button>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-400 hover:text-white text-xs font-bold border border-neutral-800 transition-all flex items-center gap-1.5"
+              title="Log Out"
+            >
+              <LogOut className="w-4 h-4" /> Log Out
             </button>
           </div>
         </div>
