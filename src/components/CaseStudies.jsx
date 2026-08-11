@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
 
 export default function CaseStudies() {
   return (
@@ -21,30 +20,33 @@ export default function CaseStudies() {
               Featured Founder
             </span>
             <h3 className="text-3xl font-extrabold text-neutral-950 mb-3">
-              Nayar Pervez — Founder of NeonLimitless
+              Aslam — Founder of Fynex International
             </h3>
             <p className="text-neutral-600 text-sm leading-relaxed mb-6 font-medium">
-              "Working with my mentor at Open & Start allowed me to pivot our business model from B2C to high-margin B2B within 4 weeks. We reached ₹15,00,000/mo before even finishing the program."
+              "Working with Open & Start allowed us to scale Fynex International and expand our agricultural technology solutions into international markets, building sustainable B2B partnerships."
             </p>
             <div className="flex items-center gap-8 text-xs font-bold text-neutral-900">
               <div>
-                <span className="block text-2xl font-black text-neutral-950">₹15L+/mo</span>
-                <span className="text-neutral-500 font-normal">Recurring Revenue</span>
+                <span className="block text-2xl font-black text-neutral-950">Agri Tech</span>
+                <span className="text-neutral-500 font-normal">Sector Focus</span>
               </div>
               <div>
-                <span className="block text-2xl font-black text-neutral-950">4 Weeks</span>
-                <span className="text-neutral-500 font-normal">Validation Time</span>
+                <span className="block text-2xl font-black text-neutral-950">Global</span>
+                <span className="text-neutral-500 font-normal">Cross-Border Scale</span>
               </div>
             </div>
           </div>
 
           <div className="rounded-2xl overflow-hidden shadow-lg h-72 sm:h-96 relative bg-neutral-900">
             <img
-              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&auto=format&fit=crop"
-              alt="Nayar Pervez Case Study"
-              className="w-full h-full object-cover"
+              src="/mentors/aslam.jpeg"
+              alt="Aslam - Founder of Fynex International"
+              className="w-full h-full object-cover object-center"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 text-white font-bold text-sm">
+              Aslam • Fynex International
+            </div>
           </div>
         </div>
 

@@ -5,7 +5,7 @@ export default function Testimonials() {
   const reviews = [
     {
       name: "Ziyad",
-      role: "Founder, EcoLogistics",
+      role: "",
       review: "Gratitude for the extraordinary experience. One of the best things I learned from Open & Start is that having a passion is one thing, turning it into a profitable career is a whole different beast. My mentor helped me validate demand in week 3!",
       rating: 5
     },
@@ -26,7 +26,7 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="py-24 bg-white text-neutral-900 border-b border-neutral-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-2 block">
             Verified Reviews
@@ -53,7 +53,7 @@ export default function Testimonials() {
                     Verified Review
                   </span>
                 </div>
-                
+
                 <p className="text-neutral-700 text-sm leading-relaxed mb-6 font-medium italic">
                   "{r.review}"
                 </p>
