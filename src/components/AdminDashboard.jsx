@@ -145,7 +145,7 @@ export default function AdminDashboard() {
                 <input
                   type="text"
                   required
-                  placeholder="admin"
+                  placeholder="Enter username"
                   value={usernameInput}
                   onChange={e => setUsernameInput(e.target.value)}
                   className="w-full pl-11 pr-4 py-3 bg-neutral-950 border border-neutral-800 rounded-xl focus:outline-none focus:border-emerald-500 text-white text-sm"
@@ -175,12 +175,6 @@ export default function AdminDashboard() {
               Sign In to Admin
             </button>
           </form>
-
-          <div className="mt-6 pt-4 border-t border-neutral-800/80 text-center">
-            <p className="text-[11px] text-neutral-500">
-              Default Credentials: <span className="text-neutral-300 font-mono font-bold">admin</span> / <span className="text-neutral-300 font-mono font-bold">admin</span>
-            </p>
-          </div>
         </div>
       </div>
     );
