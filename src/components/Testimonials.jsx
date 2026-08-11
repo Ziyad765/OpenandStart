@@ -4,21 +4,21 @@ import { Star, ShieldCheck } from 'lucide-react';
 export default function Testimonials() {
   const reviews = [
     {
-      name: "Patric Robb",
+      name: "Ziyad",
       role: "Founder, EcoLogistics",
       mentorTag: "Mentored by Hanees (FOIX)",
       review: "Gratitude for the extraordinary experience. One of the best things I learned from Open & Start is that having a passion is one thing, turning it into a profitable career is a whole different beast. My mentor helped me validate demand in week 3!",
       rating: 5
     },
     {
-      name: "Ryan Bain",
+      name: "Mohamed",
       role: "Co-Founder, ShiftHealth",
       mentorTag: "Mentored by Aslam (Fynex Intl)",
       review: "Open & Start has helped me to reshape my ambitions. I always thought I had what it takes to be successful in business, but having a 7-figure founder review my weekly experiments changed everything.",
       rating: 5
     },
     {
-      name: "Patrick Carter",
+      name: "Hanees",
       role: "Founder, PulseMedia",
       mentorTag: "Mentored by Mohamed (Griph Shipbuilding)",
       review: "I was drawn in by Open & Start’s genuine desire to empower others. I went from having a vague concept to launching a fully functional MVP with paying customers in under two months.",
