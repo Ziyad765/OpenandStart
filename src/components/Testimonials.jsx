@@ -6,21 +6,18 @@ export default function Testimonials() {
     {
       name: "Ziyad",
       role: "Founder, EcoLogistics",
-      mentorTag: "Mentored by Hanees (FOIX)",
       review: "Gratitude for the extraordinary experience. One of the best things I learned from Open & Start is that having a passion is one thing, turning it into a profitable career is a whole different beast. My mentor helped me validate demand in week 3!",
       rating: 5
     },
     {
       name: "Mohamed",
       role: "Co-Founder, ShiftHealth",
-      mentorTag: "Mentored by Aslam (Fynex Intl)",
       review: "Open & Start has helped me to reshape my ambitions. I always thought I had what it takes to be successful in business, but having a 7-figure founder review my weekly experiments changed everything.",
       rating: 5
     },
     {
       name: "Hanees",
       role: "Founder, PulseMedia",
-      mentorTag: "Mentored by Mohamed (Griph Shipbuilding)",
       review: "I was drawn in by Open & Start’s genuine desire to empower others. I went from having a vague concept to launching a fully functional MVP with paying customers in under two months.",
       rating: 5
     }
@@ -32,14 +29,11 @@ export default function Testimonials() {
         
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-2 block">
-            Verified Founder Experiences
+            Verified Reviews
           </span>
           <h2 className="text-4xl sm:text-5xl font-black text-neutral-950 tracking-tight">
-            Mentorship Reviews & Results
+            Loved by founders worldwide
           </h2>
-          <p className="text-neutral-500 text-base mt-3">
-            Real feedback from founders who scaled their business models under the 1-on-1 guidance of our sector leaders.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -65,14 +59,9 @@ export default function Testimonials() {
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-neutral-200/80 flex items-center justify-between">
-                <div>
-                  <h4 className="text-base font-bold text-neutral-950 group-hover:text-emerald-700 transition-colors">{r.name}</h4>
-                  <p className="text-xs text-neutral-500 font-medium">{r.role}</p>
-                </div>
-                <span className="text-[11px] font-semibold text-neutral-500 bg-neutral-200/60 px-2.5 py-1 rounded-lg">
-                  {r.mentorTag}
-                </span>
+              <div className="pt-4 border-t border-neutral-200/80">
+                <h4 className="text-base font-bold text-neutral-950 group-hover:text-emerald-700 transition-colors">{r.name}</h4>
+                <p className="text-xs text-neutral-500 font-medium">{r.role}</p>
               </div>
             </div>
           ))}
